@@ -23,6 +23,7 @@ import { DeleteCurrentBookCommand } from './useCases/delete.current.book.use-cas
 import { BookIdDto } from './dto/book.id.dto';
 import { UpdateCurrentBookCommand } from './useCases/update.current.book.use-case';
 import { QueryHelper } from '../../common/helpers/query.helper';
+import { QueryBookType } from '../../common/types/query.book.type';
 
 @Controller('books')
 export class BooksController {
@@ -42,7 +43,7 @@ export class BooksController {
   }
 
   @Get()
-  async getBooks(@Query() query: any) {
+  async getBooks(@Query() query: any): Promise<QueryBookType> {
     const queryInfo = this.queryHelper.queryCheckHelper(query);
     return this.booksQueryRepository.getAllBooks(queryInfo);
   }
